@@ -1,4 +1,13 @@
-type: file
+media:
+  input: images
+  output: /images
+  categories: [image]
+  rename: safe
+
+content:
+  - name: gallery
+    label: Photo gallery
+    type: file
     path: gallery.json
     format: json
     operations:
@@ -18,4 +27,3 @@ type: file
             required: true
           - name: caption
             label: Caption
-            type: text
