@@ -1,15 +1,4 @@
-# Pages CMS: https://app.pagescms.org/
-# Save this file in the root of the GitHub repository for your Netlify site.
-media:
-  input: images
-  output: /images
-  categories: [image]
-  rename: safe
-
-content:
-  - name: gallery
-    label: Photo gallery
-    type: file
+type: file
     path: gallery.json
     format: json
     operations:
