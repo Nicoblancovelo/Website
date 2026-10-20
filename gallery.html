@@ -102,6 +102,8 @@
   </main>
   <script>
     (() => {
+      const githubBase =
+  'https://raw.githubusercontent.com/Nicoblancovelo/Website/main/';
       const status = document.getElementById('status');
       const gallery = document.getElementById('gallery');
       const photo = document.getElementById('photo');
@@ -116,7 +118,9 @@
         if (index < 0 || index >= photographs.length) return;
         current = index;
         const item = photographs[current];
-        photo.src = item.image;
+        photo.src = /^https?:\/\//i.test(item.image)
+  ? item.image
+  : githubBase + item.image.replace(/^\/+/, '');
         photo.alt = item.caption || `Photograph ${current + 1}`;
         caption.textContent = item.caption || '';
         previous.disabled = current === 0;
@@ -131,7 +135,9 @@
         if (event.key === 'ArrowRight') showPhotograph(current + 1);
       });
 
-      fetch('/gallery.json', { cache: 'no-store' })
+      fetch(githubBase + 'gallery.json?v=' + Date.now(), {
+  cache: 'no-store'
+})
         .then((response) => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.json();
