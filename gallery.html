@@ -97,8 +97,8 @@
         <figcaption id="caption"></figcaption>
       </figure>
       <nav id="controls" class="controls" aria-label="Gallery navigation">
-        <button id="previous" type="button" aria-label="Previous photograph">← Previous</button>
-        <button id="next" type="button" aria-label="Next photograph">Next →</button>
+        <button id="previous" type="button" aria-label="Older photograph">← Previous</button>
+        <button id="next" type="button" aria-label="Newer photograph">Next →</button>
       </nav>
     </section>
   </main>
@@ -125,16 +125,16 @@
   : githubBase + item.image.replace(/^\/+/, '');
         photo.alt = item.caption || `Photograph ${current + 1}`;
         caption.textContent = item.caption || '';
-        previous.disabled = current === 0;
-        next.disabled = current === photographs.length - 1;
+        previous.disabled = current === photographs.length - 1;
+        next.disabled = current === 0;
       }
 
-      previous.addEventListener('click', () => showPhotograph(current - 1));
-      next.addEventListener('click', () => showPhotograph(current + 1));
+      previous.addEventListener('click', () => showPhotograph(current + 1));
+      next.addEventListener('click', () => showPhotograph(current - 1));
       document.addEventListener('keydown', (event) => {
         if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input, textarea, select')) return;
-        if (event.key === 'ArrowLeft') showPhotograph(current - 1);
-        if (event.key === 'ArrowRight') showPhotograph(current + 1);
+        if (event.key === 'ArrowLeft') showPhotograph(current + 1);
+        if (event.key === 'ArrowRight') showPhotograph(current - 1);
       });
 
       fetch(githubBase + 'gallery.json?v=' + Date.now(), {
