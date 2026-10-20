@@ -139,6 +139,7 @@
         .then((data) => {
           photographs = (Array.isArray(data.photos) ? data.photos : [])
             .filter((item) => item && typeof item.image === 'string' && item.image.trim());
+            .reverse();
           if (!photographs.length) {
             status.textContent = 'No photographs have been added yet.';
             return;
